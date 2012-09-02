@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table><tr>
+        <td><a href="/library/channels">
+            <table><tr rowspan='2'><td>all channels</td></tr>
+            </table>
+        </a></td>
+        <td>
+            <table><tr><td><img src="{{channel.thumbnail}}" width="60" height="60"/></td></tr>
+                <tr><td>{{channel.name}}</td></tr>
+            </table>
+        </td>
+    </tr></table>
+
+    <h2>Programs</h2>
+    {% for genre,genreprograms in programs.items %}
+    <h3>{{genre}}</h3>
+    <ul>
+        {% for program in genreprograms %}
+        <li>
+            <a href="/library/programs/{{program.id}}">
+                <span><img src="{{program.thumbnail}}" width="100" /></span>
+                <span>{{program.name}}</span>
+            </a>
+            <div>{{program.description}}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table><tr>
+        <td><a href="/library/channels/{{program.channel.id}}">
+            <table><tr><td><img src="{{program.channel.thumbnail}}" width="60" height="60"/></td></tr>
+                <tr><td>{{program.channel.name}}</td></tr>
+            </table>
+        </a></td>
+        <td>
+            <table><tr><td><img src="{{program.thumbnail}}" width="60" height="60"/></td></tr>
+                <tr><td>{{program.name}}</td></tr>
+            </table>
+        </td>
+    </tr></table>
+
+    <h2>Episodes</h2>
+    {% for season,seasonepisodes in episodes.items %}
+    <h3>Season {{season}}</h3>
+    <ul>
+        {% for episode in seasonepisodes %}
+        <li>
+            <span><img src="{{episode.thumbnail}}" width="100" /></span>
+            <span>Episode {{episode.number}} - {{episode.name|default:""}}</span>
+            <div>{{episode.description|default:""}}</div>
+            <div class="episode-sources">
+                <ul>
+                {% for source in episode.sources.all %}
+                    {% for media in source.medias.all %}
+                        <li>
+                            <span><img src="{{source.program.section.provider.thumbnail}}" width="40" /></span>
+                            <span><a href="{{media.url}}">{{media.url}}</a></span>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </div>            
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endblock %}

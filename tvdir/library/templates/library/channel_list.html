@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Channels</h2>
+    <ul>
+        {% for channel in channels %}
+            <li>
+                <a href="/library/channels/{{channel.id}}">
+                    <span><img src="{{channel.thumbnail}}" width="60" height="60"/></span>
+                    <span>{{channel.name}}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
